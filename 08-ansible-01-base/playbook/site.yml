@@ -1,5 +1,6 @@
 ---
   - name: Print os facts
+#    become: true
     hosts: all
     tasks:
       - name: Print OS

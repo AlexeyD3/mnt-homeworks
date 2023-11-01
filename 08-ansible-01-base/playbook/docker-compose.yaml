@@ -1,0 +1,17 @@
+version: "3"
+services:
+
+  ubuntu:
+    container_name: ubuntu
+    image: pycontribs/ubuntu
+    command: sleep infinity
+
+  centos7:
+    container_name: centos7
+    image: pycontribs/centos:8
+    command: sleep infinity
+
+  fedora:
+    container_name: fedora
+    image: pycontribs/fedora
+    command: sleep infinity
