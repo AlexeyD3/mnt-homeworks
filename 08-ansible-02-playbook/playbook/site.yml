@@ -9,17 +9,21 @@
         state: restarted
 
   tasks:
-    - block:
-        - name: Get clickhouse distrib
+    - name: Get clickhouse packages
+      block:
+        - name: Get clickhouse-server & client distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
             dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: "0700"
           with_items: "{{ clickhouse_packages }}"
+
       rescue:
-        - name: Get clickhouse distrib
+        - name: Get clickhouse-common-static distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: "0700"
 
     - name: Install clickhouse packages
       become: true
@@ -31,7 +35,7 @@
       notify: Start clickhouse service
 
     - name: Flush handlers
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
 
     - name: Clickhouse. Waiting while clickhouse-server is available...
       ansible.builtin.pause:
@@ -41,19 +45,19 @@
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database {{ clickhouse_database }};'"
       register: create_db
-      failed_when: create_db.rc != 0 and create_db.rc !=82
+      failed_when: create_db.rc != 0 and create_db.rc != 82
       changed_when: create_db.rc == 0
 
     - name: Create table
       ansible.builtin.command: "clickhouse-client -q 'create table {{ clickhouse_database }}.{{ clickhouse_table }};'"
       register: create_table
-      failed_when: create_table.rc != 0 and create_table.rc !=57
+      failed_when: create_table.rc != 0 and create_table.rc != 57
       changed_when: create_table.rc == 0
 
 - name: Install Vector
   hosts: clickhouse
   handlers:
-    - name: restart vector service
+    - name: Restart vector service
       become: true
       ansible.builtin.systemd:
         name: vector
@@ -64,25 +68,24 @@
     - name: Install Vector | YUM install
       become: true
       ansible.builtin.yum:
-#        name: https://packages.timber.io/vector/0.21.1/vector-0.21.1-1.{{ ansible_architecture }}.rpm
         name: https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.{{ ansible_architecture }}.rpm
         state: present
-      notify: restart vector service
+      notify: Restart vector service
 
     - name: Flush handlers
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
 
     - name: Configure Vector | ensure what directory exists
       become: true
-      file:
+      ansible.builtin.file:
         path: "{{ vector_config_dir }}"
         state: directory
-        mode: 0644
+        mode: "0644"
     - name: Configure Vector | Template config
       become: true
       ansible.builtin.template:
         src: vector.yml.j2
-        mode: 0644
+        mode: "0644"
         dest: "{{ vector_config_dir }}/vector.yml"
 
     - name: Configure Service | Template systemd unit
@@ -90,6 +93,5 @@
       ansible.builtin.template:
         src: vector.service.j2
         dest: /etc/systemd/system/vector.service
-        mode: 0644
-      notify: restart vector service
-
+        mode: "0644"
+      notify: Restart vector service
