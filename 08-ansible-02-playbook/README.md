@@ -13,7 +13,123 @@
 2. Допишите playbook: нужно сделать ещё один play, который устанавливает и настраивает [vector](https://vector.dev). Конфигурация vector должна деплоиться через template файл jinja2. От вас не требуется использовать все возможности шаблонизатора, просто вставьте стандартный конфиг в template файл. Информация по шаблонам по [ссылке](https://www.dmosk.ru/instruktions.php?object=ansible-nginx-install).
 3. При создании tasks рекомендую использовать модули: `get_url`, `template`, `unarchive`, `file`.
 4. Tasks должны: скачать дистрибутив нужной версии, выполнить распаковку в выбранную директорию, установить vector.
+
+```shell
+[wolinshtain@localhost playbook]$ ansible-playbook site.yml -i inventory/prod.yml
+
+PLAY [Install Clickhouse] **************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Get clickhouse distrib] **********************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01] => (item=clickhouse-client)
+ok: [clickhouse-01] => (item=clickhouse-server)
+failed: [clickhouse-01] (item=clickhouse-common-static) => {"ansible_loop_var": "item", "changed": false, "dest": "./clickhouse-common-static-22.3.3.44.rpm", "elapsed": 0, "gid": 1000, "group": "alex", "item": "clickhouse-common-static", "mode": "0664", "msg": "Request failed", "owner": "alex", "response": "HTTP Error 404: Not Found", "size": 246310036, "state": "file", "status_code": 404, "uid": 1000, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.3.3.44.noarch.rpm"}
+
+TASK [Get clickhouse distrib] **********************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install clickhouse packages] *****************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Flush handlers] ******************************************************************************************************************************************************************************************************************************
+
+TASK [Clickhouse. Waiting while clickhouse-server is available...] *********************************************************************************************************************************************************************************
+Pausing for 10 seconds (output is hidden)
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [clickhouse-01]
+
+TASK [Create database] *****************************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Create table] ********************************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY [Install Vector] ******************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install Vector | YUM install] ****************************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Flush handlers] ******************************************************************************************************************************************************************************************************************************
+
+TASK [Configure Vector | ensure what directory exists] *********************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Configure Vector | Template config] **********************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Configure Service | Template systemd unit] ***************************************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY RECAP *****************************************************************************************************************************************************************************************************************************************
+clickhouse-01              : ok=11   changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
+```
+&nbsp;
+&nbsp;
+
 5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.
+
+```shell
+[wolinshtain@localhost playbook]$ ansible-lint site.yml
+WARNING  Listing 13 violation(s) that are fatal
+name[missing]: All tasks should be named.
+site.yml:12 Task/Handler: block/always/rescue 
+
+risky-file-permissions: File permissions unset or incorrect.
+site.yml:13 Task/Handler: Get clickhouse distrib
+
+risky-file-permissions: File permissions unset or incorrect.
+site.yml:19 Task/Handler: Get clickhouse distrib
+
+fqcn[action-core]: Use FQCN for builtin module actions (meta).
+site.yml:33 Use `ansible.builtin.meta` or `ansible.legacy.meta` instead.
+
+jinja[spacing]: Jinja2 spacing could be improved: create_db.rc != 0 and create_db.rc !=82 -> create_db.rc != 0 and create_db.rc != 82 (warning)
+site.yml:41 Jinja2 template rewrite recommendation: `create_db.rc != 0 and create_db.rc != 82`.
+
+jinja[spacing]: Jinja2 spacing could be improved: create_table.rc != 0 and create_table.rc !=57 -> create_table.rc != 0 and create_table.rc != 57 (warning)
+site.yml:47 Jinja2 template rewrite recommendation: `create_table.rc != 0 and create_table.rc != 57`.
+
+name[casing]: All names should start with an uppercase letter.
+site.yml:56 Task/Handler: restart vector service
+
+fqcn[action-core]: Use FQCN for builtin module actions (meta).
+site.yml:72 Use `ansible.builtin.meta` or `ansible.legacy.meta` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+site.yml:75 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+yaml[octal-values]: Forbidden implicit octal value "0644"
+site.yml:80
+
+yaml[octal-values]: Forbidden implicit octal value "0644"
+site.yml:85
+
+yaml[octal-values]: Forbidden implicit octal value "0644"
+site.yml:93
+
+yaml[empty-lines]: Too many blank lines (1 > 0)
+site.yml:95
+
+Read documentation for instructions on how to ignore specific rule violations.
+
+                    Rule Violation Summary                    
+ count tag                    profile    rule associated tags 
+     2 jinja[spacing]         basic      formatting (warning) 
+     1 name[missing]          basic      idiom                
+     1 yaml[empty-lines]      basic      formatting, yaml     
+     3 yaml[octal-values]     basic      formatting, yaml     
+     1 name[casing]           moderate   idiom                
+     2 risky-file-permissions safety     unpredictability     
+     3 fqcn[action-core]      production formatting           
+
+Failed: 11 failure(s), 2 warning(s) on 1 files. Last profile that met the validation criteria was 'min'.
+```
+
 6. Попробуйте запустить playbook на этом окружении с флагом `--check`.
 7. Запустите playbook на `prod.yml` окружении с флагом `--diff`. Убедитесь, что изменения на системе произведены.
 8. Повторно запустите playbook с флагом `--diff` и убедитесь, что playbook идемпотентен.
