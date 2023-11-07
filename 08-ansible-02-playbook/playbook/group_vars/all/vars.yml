@@ -13,11 +13,9 @@ vector_config:
       type: clickhouse
       inputs:
         - sample_file
-      endpoints: http://localhost:8123
+      endpoint: http://localhost:8123
       database: logs
       table: from_vector
-      auth:
-        password: netology
-        user: vector
       skip_unknown_fields: true
+      healthcheck: false
       compression: gzip

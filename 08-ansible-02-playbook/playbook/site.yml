@@ -17,7 +17,7 @@
             dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
             mode: "0700"
           with_items: "{{ clickhouse_packages }}"
-
+          check_mode: false
       rescue:
         - name: Get clickhouse-common-static distrib
           ansible.builtin.get_url:
@@ -33,6 +33,13 @@
           - clickhouse-client-{{ clickhouse_version }}.rpm
           - clickhouse-server-{{ clickhouse_version }}.rpm
       notify: Start clickhouse service
+
+#    - name: Clickhouse-server status
+#      ansible.builtin.command: "systemctl status clickhouse-server"
+#      become: true
+#      register: clickhouse_status
+#      changed_when: clickhouse_status.rc != 0 and clickhouse_status.rc == 3
+#      notify: Start clickhouse service
 
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
@@ -81,12 +88,18 @@
         path: "{{ vector_config_dir }}"
         state: directory
         mode: "0644"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
+
     - name: Configure Vector | Template config
       become: true
       ansible.builtin.template:
         src: vector.yml.j2
         mode: "0644"
         dest: "{{ vector_config_dir }}/vector.yml"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
+#        validate: vector validate --no-environment --config-yaml %s
 
     - name: Configure Service | Template systemd unit
       become: true
@@ -94,4 +107,12 @@
         src: vector.service.j2
         dest: /etc/systemd/system/vector.service
         mode: "0644"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
       notify: Restart vector service
+    - name: Start Vector
+      become: true
+      ansible.builtin.systemd:
+        name: vector
+        state: started
+        daemon_reload: true

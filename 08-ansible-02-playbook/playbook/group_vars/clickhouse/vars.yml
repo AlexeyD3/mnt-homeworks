@@ -6,8 +6,6 @@ clickhouse_packages:
   - clickhouse-common-static
 clickhouse_database: "logs"
 clickhouse_table: "from_vector ('file' String, 'host' String, 'message' String, 'timestamp' DateTime) engine=Log"
-clickhouse_users_custom:
-  vector:
-    password: netology
-    networks:
-      - localhost:8123
+#clickhouse_users_custom:
+#  vector:
+#    password: "netology"
