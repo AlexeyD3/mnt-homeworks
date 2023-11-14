@@ -1,6 +1,7 @@
 ---
 vector_version: 0.21.1
 vector_config_dir: "{{ ansible_user_dir }}/vector_config"
+vector_source_dir: "/var/lib/vector/sample_file"
 vector_config:
   sources:
     sample_file:
@@ -16,6 +17,9 @@ vector_config:
       endpoint: http://localhost:8123
       database: logs
       table: from_vector
+      auth:
+        password: qwerty
+        user: mira
       skip_unknown_fields: true
       healthcheck: false
       compression: gzip
