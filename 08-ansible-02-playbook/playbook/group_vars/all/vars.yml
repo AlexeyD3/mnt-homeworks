@@ -20,6 +20,7 @@ vector_config:
       auth:
         password: qwerty
         user: mira
+        strategy: basic
       skip_unknown_fields: true
       healthcheck: false
       compression: gzip
