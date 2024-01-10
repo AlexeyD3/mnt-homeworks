@@ -5,7 +5,7 @@
 1. Подготовьте в Yandex Cloud три хоста: для `clickhouse`, для `vector` и для `lighthouse`.
 
 > Подготовил образ через Packer и автоматизировал создание нужных ВМ через терраформ
-![screenshot]()
+![screenshot](https://i.ibb.co/p0rCXhM/Screenshot-from-2024-01-10-21-44-37.png)
 
 2. Репозиторий LightHouse находится [по ссылке](https://github.com/VKCOM/lighthouse).
 
@@ -55,17 +55,20 @@ resource "local_file" "prod" {
 
 5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.
 6. Попробуйте запустить playbook на этом окружении с флагом `--check`.
+> Результат выполнения `terraform init`:
+![screenshot](https://i.ibb.co/HXHhvQV/Screenshot-from-2024-01-10-22-08-16.png)
 7. Запустите playbook на `prod.yml` окружении с флагом `--diff`. Убедитесь, что изменения на системе произведены.
 8. Повторно запустите playbook с флагом `--diff` и убедитесь, что playbook идемпотентен.
 > Плейбук идемпотентен:
-![screenshot]()
+![screenshot](https://i.ibb.co/7NvTVXx/Screenshot-from-2024-01-10-22-21-10.png)
 9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги.
 10. Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-03-yandex` на фиксирующий коммит, в ответ предоставьте ссылку на него.
 
+> В итоге через `debug` модуль получили ссылку и зашли в веб интерфейс lighthouse:
+![screenshot](https://i.ibb.co/GV3vjv0/Screenshot-from-2024-01-10-22-06-40.png)
 ---
 
 ### Как оформить решение задания
 
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
-
 ---
