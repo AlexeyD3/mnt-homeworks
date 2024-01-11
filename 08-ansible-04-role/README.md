@@ -40,7 +40,7 @@
 [clickhouse-role](https://github.com/AlexeyD3/clickhouse-role)  
 [lighthouse-role](https://github.com/AlexeyD3/lighthouse-role)  
 [vector-role](https://github.com/AlexeyD3/vector-role)  
-[playbook-repo](https://github.com/AlexeyD3/mnt-homeworks/blob/ansible-04/08-ansible-04-role/site.yml)  
+[playbook-repo](https://github.com/AlexeyD3/mnt-homeworks/tree/ansible-04/08-ansible-04-role)  
 
 
 ---
