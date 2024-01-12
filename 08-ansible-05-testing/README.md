@@ -4,7 +4,7 @@
 
 1. Установите molecule: `pip3 install "molecule==3.5.2"` и драйвера `pip3 install molecule_docker molecule_podman`.
 2. Выполните `docker pull aragast/netology:latest` —  это образ с podman, tox и несколькими пайтонами (3.7 и 3.9) внутри.
-
+![screenshot](https://i.ibb.co/ypFzHXN/Screenshot-18.png)
 ## Основная часть
 
 Ваша цель — настроить тестирование ваших ролей. 
@@ -22,7 +22,9 @@
 5. Запустите тестирование роли повторно и проверьте, что оно прошло успешно.
 5. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 
+![screenshot](https://i.ibb.co/DYVBmG6/Screenshot-21.png)
 ### Tox
+
 
 1. Добавьте в директорию с vector-role файлы из [директории](./example).
 2. Запустите `docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash`, где path_to_repo — путь до корня репозитория с vector-role на вашей файловой системе.
@@ -33,7 +35,7 @@
 9. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 
 После выполнения у вас должно получится два сценария molecule и один tox.ini файл в репозитории. Не забудьте указать в ответе теги решений Tox и Molecule заданий. В качестве решения пришлите ссылку на  ваш репозиторий и скриншоты этапов выполнения задания. 
-
+[ссылка на репо](https://github.com/AlexeyD3/vector-role/tree/main)
 ## Необязательная часть
 
 1. Проделайте схожие манипуляции для создания роли LightHouse.
