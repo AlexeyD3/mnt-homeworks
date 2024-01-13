@@ -30,7 +30,51 @@
 2. Запустите `docker run --privileged=True -v <path_to_repo>:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash`, где path_to_repo — путь до корня репозитория с vector-role на вашей файловой системе.
 3. Внутри контейнера выполните команду `tox`, посмотрите на вывод.
 5. Создайте облегчённый сценарий для `molecule` с драйвером `molecule_podman`. Проверьте его на исполнимость.
+```
+wolinshtain@alma:~/ansible_role/roles/vector-role# molecule matrix test
+INFO     Test matrix
+---                                                                             
+centos7:                                                                        
+  - dependency                                                                  
+  - lint                                                                        
+  - cleanup                                                                     
+  - destroy                                                                     
+  - syntax                                                                      
+  - create                                                                      
+  - prepare                                                                     
+  - converge                                                                    
+  - idempotence                                                                 
+  - side_effect                                                                 
+  - verify                                                                      
+  - cleanup                                                                     
+  - destroy                                                                     
+centos7_Lite:                                                                   
+  - create                                                                      
+  - prepare                                                                     
+  - converge                                                                    
+  - idempotence                                                                 
+  - side_effect                                                                 
+  - verify                                                                      
+  - cleanup                                                                     
+  - destroy 
+```
 6. Пропишите правильную команду в `tox.ini`, чтобы запускался облегчённый сценарий.
+```
+[tox]
+minversion = 1.8
+basepython = python3.6
+envlist = py{38}-ansible{210,30}
+skipsdist = true
+
+[testenv]
+passenv = *
+deps =
+  -r tox-requirements.txt
+  ansible210: ansible<2.12
+  ansible30: ansible<3.1
+commands =
+  {posargs:molecule test -s centos7 --destroy always}
+```
 8. Запустите команду `tox`. Убедитесь, что всё отработало успешно.
 9. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 ![screenshot](https://i.ibb.co/pXr803c/Screenshot-23.png)
