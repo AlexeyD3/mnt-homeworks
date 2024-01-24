@@ -39,7 +39,7 @@
 ![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-01/09-ci-01-intro/pic/finish.png?raw=true)
 6. Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
-
+[файлы workflow](https://github.com/AlexeyD3/mnt-homeworks/tree/ci-01/09-ci-01-intro/workflow)
 ---
 
 ### Как оформить решение задания
