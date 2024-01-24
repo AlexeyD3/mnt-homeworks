@@ -30,13 +30,13 @@
 **Что нужно сделать**
 
 1. Создайте задачу с типом bug, попытайтесь провести его по всему workflow до Done. 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-01/09-ci-01-intro/pic/bug.png?raw=true)
 2. Создайте задачу с типом epic, к ней привяжите несколько задач с типом task, проведите их по всему workflow до Done. 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-01/09-ci-01-intro/pic/others.png?raw=true)
 3. При проведении обеих задач по статусам используйте kanban. 
 4. Верните задачи в статус Open.
 5. Перейдите в Scrum, запланируйте новый спринт, состоящий из задач эпика и одного бага, стартуйте спринт, проведите задачи до состояния Closed. Закройте спринт.
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-01/09-ci-01-intro/pic/finish.png?raw=true)
 6. Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
 
