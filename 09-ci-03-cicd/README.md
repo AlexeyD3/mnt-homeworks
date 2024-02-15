@@ -141,7 +141,14 @@ OS name: "linux", version: "6.5.0-17-generic", arch: "amd64", family: "unix"
 
 1. Поменяйте в `pom.xml` блок с зависимостями под ваш артефакт из первого пункта задания для Nexus (java с версией 8_282).
 2. Запустите команду `mvn package` в директории с `pom.xml`, ожидайте успешного окончания.
+
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-16%2000-07-55.png?raw=true)
+
+
 3. Проверьте директорию `~/.m2/repository/`, найдите ваш артефакт.
+
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-16%2000-19-40.png?raw=true)
+
 4. В ответе пришлите исправленный файл `pom.xml`.
 
 ```xml
@@ -173,7 +180,6 @@ OS name: "linux", version: "6.5.0-17-generic", arch: "amd64", family: "unix"
 ```
 
 
-![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-16%2000-07-55.png?raw=true)
 
 ---
 
