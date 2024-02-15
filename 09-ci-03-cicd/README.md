@@ -10,17 +10,17 @@
 3. Добавьте в [files](./infrastructure/files/) файл со своим публичным ключом (id_rsa.pub). Если ключ называется иначе — найдите таску в плейбуке, которая использует id_rsa.pub имя, и исправьте на своё.
 4. Запустите playbook, ожидайте успешного завершения.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2022-49-07.png?raw=true)
 
 5. Проверьте готовность SonarQube через [браузер](http://localhost:9000).
 6. Зайдите под admin\admin, поменяйте пароль на свой.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2022-53-28.png?raw=true)
 
 7.  Проверьте готовность Nexus через [бразуер](http://localhost:8081).
 8. Подключитесь под admin\admin123, поменяйте пароль, сохраните анонимный доступ.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2022-58-43.png?raw=true)
 
 ## Знакомоство с SonarQube
 
@@ -72,10 +72,13 @@ INFO: ------------------------------------------------------------------------
 ```
 6. Посмотрите результат в интерфейсе.
 7. Исправьте ошибки, которые он выявил, включая warnings.
+
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2023-15-51.png?raw=true)
+
 8. Запустите анализатор повторно — проверьте, что QG пройдены успешно.
 9. Сделайте скриншот успешного прохождения анализа, приложите к решению ДЗ.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2023-27-23.png?raw=true)
 
 ## Знакомство с Nexus
 
@@ -92,7 +95,7 @@ INFO: ------------------------------------------------------------------------
 2. В него же загрузите такой же артефакт, но с version: 8_102.
 3. Проверьте, что все файлы загрузились успешно.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2023-39-40.png?raw=true)
 
 4. В ответе пришлите файл `maven-metadata.xml` для этого артефекта.
 ```xml
