@@ -95,7 +95,7 @@ INFO: ------------------------------------------------------------------------
 2. В него же загрузите такой же артефакт, но с version: 8_102.
 3. Проверьте, что все файлы загрузились успешно.
 
-![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2023-39-40.png?raw=true)
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-15%2023-59-48.png?raw=true)
 
 4. В ответе пришлите файл `maven-metadata.xml` для этого артефекта.
 ```xml
