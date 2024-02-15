@@ -141,6 +141,8 @@ OS name: "linux", version: "6.5.0-17-generic", arch: "amd64", family: "unix"
 3. Проверьте директорию `~/.m2/repository/`, найдите ваш артефакт.
 4. В ответе пришлите исправленный файл `pom.xml`.
 
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/Screenshot%20from%202024-02-16%2000-07-55.png?raw=true)
+
 ---
 
 ### Как оформить решение задания
