@@ -4,7 +4,7 @@
 
 1. Создайте два VM в Yandex Cloud с параметрами: 2CPU 4RAM Centos7 (остальное по минимальным требованиям).
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/ci-03-cidi/09-ci-03-cicd/img/2024-02-15_22-32-21.png?raw=true)
 
 2. Пропишите в [inventory](./infrastructure/inventory/cicd/hosts.yml) [playbook](./infrastructure/site.yml) созданные хосты.
 3. Добавьте в [files](./infrastructure/files/) файл со своим публичным ключом (id_rsa.pub). Если ключ называется иначе — найдите таску в плейбуке, которая использует id_rsa.pub имя, и исправьте на своё.
