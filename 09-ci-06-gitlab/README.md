@@ -26,7 +26,7 @@
 5. Скрипт из репозитория размещён в /python_api.
 6. Точка вызова: запуск скрипта.
 7. При комите в любую ветку должен собираться docker image с форматом имени hello:gitlab-$CI_COMMIT_SHORT_SHA . Образ должен быть выложен в Gitlab registry или yandex registry.   
-
+![]()
 ### Product Owner
 
 Вашему проекту нужна бизнесовая доработка: нужно поменять JSON ответа на вызов метода GET `/rest/api/get_info`, необходимо создать Issue в котором указать:
@@ -34,7 +34,7 @@
 1. Какой метод необходимо исправить.
 2. Текст с `{ "message": "Already started" }` на `{ "message": "Running"}`.
 3. Issue поставить label: feature.
-
+![]()
 ### Developer
 
 Пришёл новый Issue на доработку, вам нужно:
@@ -43,13 +43,27 @@
 2. Внести изменения по тексту из задания.
 3. Подготовить Merge Request, влить необходимые изменения в `master`, проверить, что сборка прошла успешно.
 
-
+![]()
 ### Tester
 
 Разработчики выполнили новый Issue, необходимо проверить валидность изменений:
 
 1. Поднять докер-контейнер с образом `python-api:latest` и проверить возврат метода на корректность.
 2. Закрыть Issue с комментарием об успешности прохождения, указав желаемый результат и фактически достигнутый.
+```bash
+alex@ubuntu22:~$ docker run -p 5290:5290 -d --name hello comita.gitlab.yandexcloud.net:5050/alexeyd3/devops-netology/hello:gitlab-d82c87d5
+Unable to find image 'comita.gitlab.yandexcloud.net:5050/alexeyd3/devops-netology/hello:gitlab-d82c87d5' locally
+gitlab-d82c87d5: Pulling from alexeyd3/devops-netology/hello
+
+
+alex@ubuntu22:~$ docker ps
+CONTAINER ID   IMAGE                                                                               COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+1c1c966a1427   comita.gitlab.yandexcloud.net:5050/alexeyd3/devops-netology/hello:gitlab-d82c87d5   "python3.8 /python_a…"   14 seconds ago   Up 13 seconds   0.0.0.0:5290->5290/tcp, :::5290->5290/tcp   hello
+
+alex@ubuntu22:~$ curl localhost:5290/rest/api/get_info
+{"version": 3, "method": "GET", "message": "Running"}
+```
+
 
 ## Итог
 

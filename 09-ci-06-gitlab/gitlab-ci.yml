@@ -1,0 +1,25 @@
+stages:
+  - build
+  - deploy
+image: docker:stable
+services:
+  - name: docker:dind
+    alias: thedockerhost
+variables:
+  DOCKER_HOST: tcp://thedockerhost:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+build-job:
+  stage: build
+  script:
+    - docker build -t some_local_build:latest .
+  except:
+    - main
+deploy-job:
+  stage: deploy
+  script:
+    - docker build -t $CI_REGISTRY/alexeyd3/devops-netology/hello:gitlab-$CI_COMMIT_SHORT_SHA .
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+    - docker push $CI_REGISTRY/alexeyd3/devops-netology/hello:gitlab-$CI_COMMIT_SHORT_SHA
+  only:
+    - main
