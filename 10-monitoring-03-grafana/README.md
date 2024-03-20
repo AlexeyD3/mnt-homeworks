@@ -39,21 +39,21 @@
 Создайте Dashboard и в ней создайте Panels:
 
 - утилизация CPU для nodeexporter (в процентах, 100-idle);
-```
+```text
 100 - avg by (instance)(irate(node_cpu_seconds_total{instance="nodeexporter:9100", job="nodeexporter", mode="idle"}[30m])) * 100
 ```
 - CPULA 1/5/15;
-```
+```text
 node_load1{job="nodeexporter"}
 node_load5{job="nodeexporter"}
 node_load15{job="nodeexporter"}
 ```
 - количество свободной оперативной памяти;
-```
+```text
 node_memory_MemFree_bytes{job='nodeexporter'}
 ```
 - количество места на файловой системе.
-```
+```text
 sum(node_filesystem_avail_bytes{device=~"/dev/sda.+"})
 sum(node_filesystem_size_bytes{device=~"/dev/sda.+"})
 ```
