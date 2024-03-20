@@ -26,7 +26,7 @@
 1. Подключите поднятый вами prometheus, как источник данных.
 1. Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.  
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-03-grafana/10-monitoring-03-grafana/img/grafana-prometheus.png?raw=true)
 
 ## Задание 2
 
@@ -60,7 +60,7 @@ sum(node_filesystem_size_bytes{device=~"/dev/sda.+"})
 
 Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-03-grafana/10-monitoring-03-grafana/img/grafana-dashboard.png?raw=true)
 
 
 ## Задание 3
@@ -68,7 +68,7 @@ sum(node_filesystem_size_bytes{device=~"/dev/sda.+"})
 1. Создайте для каждой Dashboard подходящее правило alert — можно обратиться к первой лекции в блоке «Мониторинг».
 1. В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 
-![screenshot]()
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-03-grafana/10-monitoring-03-grafana/img/grafana-alerting.png?raw=true)
 
 
 ## Задание 4
@@ -76,7 +76,7 @@ sum(node_filesystem_size_bytes{device=~"/dev/sda.+"})
 1. Сохраните ваш Dashboard.Для этого перейдите в настройки Dashboard, выберите в боковом меню «JSON MODEL». Далее скопируйте отображаемое json-содержимое в отдельный файл и сохраните его.
 1. В качестве решения задания приведите листинг этого файла.
 
-[dashboard.json](https://valyala.medium.com/promql-tutorial-for-beginners-9ab455142085)
+[dashboard.json](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-03-grafana/10-monitoring-03-grafana/dashboard.json)
 ---
 
 ### Как оформить решение задания
