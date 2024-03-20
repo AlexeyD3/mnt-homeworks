@@ -81,6 +81,8 @@
 P.S.: если при запуске некоторые контейнеры будут падать с ошибкой - проставьте им режим `Z`, например
 `./data:/var/lib:Z`
 #
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-02-system/10-monitoring-02-systems/img/chronograf.png?raw=true)
+
 8. Перейдите в веб-интерфейс Chronograf (http://localhost:8888) и откройте вкладку Data explorer.
         
     - Нажмите на кнопку Add a query
@@ -90,6 +92,8 @@ P.S.: если при запуске некоторые контейнеры б�
 
 Для выполнения задания приведите скриншот с отображением метрик утилизации cpu из веб-интерфейса.
 #
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-02-system/10-monitoring-02-systems/img/chronograf-add.png?raw=true)
+
 9. Изучите список [telegraf inputs](https://github.com/influxdata/telegraf/tree/master/plugins/inputs). 
 Добавьте в конфигурацию telegraf следующий плагин - [docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker):
 ```
@@ -113,6 +117,8 @@ P.S.: если при запуске некоторые контейнеры б�
       - "8094:8094"
       - "8125:8125/udp"
 ```
+
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-02-system/10-monitoring-02-systems/img/chronograf-docker.png?raw=true)
 
 После настройке перезапустите telegraf, обновите веб интерфейс и приведите скриншотом список `measurments` в 
 веб-интерфейсе базы telegraf.autogen . Там должны появиться метрики, связанные с docker.
@@ -164,6 +170,8 @@ P.P.S.: по желанию можно себя не ограничивать т
     - фантазируйте)
     
     ---
+
+![screenshot](https://github.com/AlexeyD3/mnt-homeworks/blob/monitoring-02-system/10-monitoring-02-systems/img/chronograf-extend.png?raw=true)
 
 ### Как оформить ДЗ?
 
